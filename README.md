@@ -1,35 +1,42 @@
-// Clase principal donde se ejecuta el programa
-public class Main {
+// Definimos la clase Producto
+public class Producto {
 
-    // Método main: punto de entrada del programa
-    public static void main(String[] args) {
+    // Atributos privados del producto
+    private String nombre;     // Almacena el nombre del producto
+    private double precio;     // Almacena el precio del producto
+    private int cantidad;      // Almacena cuántas unidades hay en inventario
 
-        // Se crea un objeto producto1 con valores iniciales
-        Producto producto1 = new Producto("Laptop", 15000.00, 10);
+    // Constructor de la clase Producto: se ejecuta al crear un objeto
+    public Producto(String nombre, double precio, int cantidad) {
+        this.nombre = nombre;       // Asigna el nombre pasado como parámetro
+        this.precio = precio;       // Asigna el precio pasado como parámetro
+        this.cantidad = cantidad;   // Asigna la cantidad pasada como parámetro
+    }
 
-        // Se crea otro objeto producto2 con otros valores
-        Producto producto2 = new Producto("Mouse", 200.00, 50);
+    // Método para mostrar toda la información del producto
+    public void mostrarInformacion() {
+        System.out.println("Nombre: " + nombre);               // Muestra el nombre
+        System.out.println("Precio: $" + precio);              // Muestra el precio
+        System.out.println("Cantidad en inventario: " + cantidad +"\n"); // Muestra cantidad
+    }
 
-        // Se muestra la información del producto1 (Laptop)
-        producto1.mostrarInformacion();
+    // Método para cambiar el precio del producto
+    public void cambiarPrecio(double nuevoPrecio) {
+        this.precio = nuevoPrecio;  // Asigna un nuevo precio
+    }
 
-        // Se intenta vender 2 unidades de la Laptop
-        producto1.vender(2);
+    // Método para agregar más unidades al inventario
+    public void agregarStock(int cantidad) {
+        this.cantidad += cantidad;  // Suma las unidades al inventario actual
+    }
 
-        // Se vuelve a mostrar la información actualizada de producto1
-        producto1.mostrarInformacion();
-
-        // Se muestra la información del segundo producto (Mouse)
-        producto2.mostrarInformacion();
-
-        // Se agregan 10 unidades al stock del Mouse
-        producto2.agregarStock(10);
-
-        // Se cambia el precio del Mouse a 180
-        producto2.cambiarPrecio(180.00);
-
-        // Se muestra la información del Mouse actualizada
-        producto2.mostrarInformacion();
-
+    // Método para realizar una venta
+    public void vender(int unidades) {
+        if (unidades <= cantidad) {         // Verifica si hay suficiente inventario
+            cantidad -= unidades;           // Resta las unidades vendidas
+            System.out.println("Venta realizada.");
+        } else {
+            System.out.println("No hay suficiente inventario."); // Muestra error si no hay suficientes
+        }
     }
 }
